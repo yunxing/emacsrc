@@ -290,14 +290,6 @@ With arg N, insert N newlines."
 (global-set-key [remap replace-regexp] 'vr/replace)
 
 
-
-(when (executable-find "ag")
-  (require-package 'ag)
-  (require-package 'wgrep-ag)
-  (setq-default ag-highlight-search t))
-
-
-
 (require-package 'highlight-escape-sequences)
 (hes-mode)
 
