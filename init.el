@@ -26,6 +26,9 @@
 (setq-default tab-width 4)
 (add-hook 'go-mode-hook (lambda ()
                           (add-hook 'before-save-hook 'gofmt-before-save)))
+(add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/golang/lint/misc/emacs"))
+(require 'golint)
+
 (require 'init-yasnippet)
 (require 'init-frame-hooks)
 (require 'init-maxframe)
