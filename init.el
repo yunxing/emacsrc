@@ -24,8 +24,8 @@
 (require-package 'mwe-log-commands)
 (require-package 'go-mode)
 (setq-default tab-width 4)
-(add-hook 'go-mode-hook (lambda ()
-                          (add-hook 'before-save-hook 'gofmt-before-save)))
+;; (add-hook 'go-mode-hook (lambda ()
+;;                           (add-hook 'before-save-hook 'gofmt-before-save)))
 (add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/golang/lint/misc/emacs"))
 (require 'golint)
 
@@ -68,7 +68,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" default))))
+ '(custom-safe-themes
+   (quote
+    ("4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" default)))
+ '(warning-minimum-level :error))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
