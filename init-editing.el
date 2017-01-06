@@ -3,6 +3,7 @@
 (global-auto-revert-mode t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (global-unset-key "\C-c\C-c")
+(electric-indent-mode nil)
 (defun my-lineup (langelem)
     ;; Copy and modified from c-lineup-arglist
     (save-excursion

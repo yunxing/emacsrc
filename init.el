@@ -1,5 +1,10 @@
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
+
+
 (add-to-list 'load-path "~/.emacs.d")
-(require 'init-benchmarking) ;; Measure startup time
+;; (require 'init-benchmarking) ;; Measure startup time
 
 (defconst *spell-check-support-enabled* nil)
 (defconst *is-a-mac* (eq system-type 'darwin))
@@ -12,24 +17,19 @@
 (require 'init-exec-path) ;; Set up $PATH
 
 (require-package 'wgrep)
-(require-package 'cmake-mode)
-(require 'cmake-mode)
-(setq auto-mode-alist
-      (append '(("CMakeLists\\.txt\\'" . cmake-mode)
-                ("\\.cmake\\'" . cmake-mode))
-              auto-mode-alist))
 (require-package 'project-local-variables)
 (require-package 'diminish)
 (require-package 'scratch)
 (require-package 'mwe-log-commands)
 (require-package 'go-mode)
 (setq-default tab-width 4)
+
 ;; (add-hook 'go-mode-hook (lambda ()
 ;;                           (add-hook 'before-save-hook 'gofmt-before-save)))
 ;; (add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/golang/lint/misc/emacs"))
 ;; (require 'golint)
 
-(require 'init-yasnippet)
+;; (require 'init-yasnippet)
 (require 'init-frame-hooks)
 (require 'init-maxframe)
 (require 'init-dired)
@@ -45,13 +45,32 @@
 ;;----------------------------------------------------------------------------
 ;; My init files
 ;;----------------------------------------------------------------------------
-(require-package 'erlang)
 (require 'init-buffers)
 (require 'init-editing)
 (require 'init-my-git)
-;; (require 'init-ascope)
 (require 'init-haskell)
 (require 'init-clang)
+
+;;----------------------------------------------------------------------------
+;; Reason setup
+;;----------------------------------------------------------------------------
+
+
+;; (setq opam (substring (shell-command-to-string "opam config var prefix 2> /dev/null") 0 -1))
+;; (add-to-list 'load-path (concat opam "/share/emacs/site-lisp"))
+;; (setq refmt-command "/Users/yunxing/programming/infer/node_modules/reason/_build/ocamlfind/bin/refmt")
+;; (setq reason-merlinfmt-command (concat opam "/bin/refmt_merlin"))
+;; (require 'reason-mode)
+;; (require 'merlin)
+;; (setq merlin-ac-setup t)
+;; (add-hook 'reason-mode-hook (lambda ()
+;;                               (add-hook 'before-save-hook 'refmt-before-save)
+;;                               (merlin-mode)
+;;                               ))
+
+(require 'yarn-reason)
+(add-hook 'reason-mode-hook (lambda ()
+                              (add-hook 'before-save-hook 'refmt-before-save)))
 
 
 ;;----------------------------------------------------------------------------
@@ -60,7 +79,8 @@
 (require 'server)
 (unless (server-running-p)
   (server-start))
-
+(vc-mode -1)
+(setq vc-handled-backends ())
 (message "init completed in %.2fms"
          (sanityinc/time-subtract-millis (current-time) before-init-time))
 (custom-set-variables
